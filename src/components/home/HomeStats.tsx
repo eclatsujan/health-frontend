@@ -7,18 +7,14 @@ const stats = [
 
 export default function HomeStats() {
   return (
-    <section className="border-b border-slate-100 bg-[#f8fafc] py-0">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-          <div className="grid grid-cols-2 divide-x divide-slate-100 md:grid-cols-4">
+    <section className="border-b border-outline-variant/20 bg-surface py-0">
+      <div className="mx-auto w-[90%] max-w-8xl px-0 sm:px-4 py-8">
+        <div className="overflow-hidden rounded-xl border border-outline-variant/30 bg-surface-container-lowest shadow-sm">
+          <div className="grid grid-cols-2 divide-x divide-outline-variant/20 md:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="px-4 py-6 text-center sm:px-6">
-                <p className="font-display text-2xl font-bold text-slate-900 sm:text-3xl">
-                  {s.value}
-                </p>
-                <p className="font-ui mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">
-                  {s.label}
-                </p>
+                <p className="font-headline text-2xl font-bold text-on-surface sm:text-3xl">{s.value}</p>
+                <p className="font-body mt-1 text-xs font-medium uppercase tracking-wide text-on-surface-variant">{s.label}</p>
               </div>
             ))}
           </div>

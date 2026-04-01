@@ -1,6 +1,8 @@
-import SiteHeader from '@/components/site/SiteHeader';
-import SiteFooter from '@/components/site/SiteFooter';
+import QueryProvider from '@/components/providers/QueryProvider';
 import MobileBottomNav from '@/components/site/MobileBottomNav';
+import RouteMetaManager from '@/components/site/RouteMetaManager';
+import SiteFooter from '@/components/site/SiteFooter';
+import SiteHeader from '@/components/site/SiteHeader';
 
 export default function SiteLayout({
   children,
@@ -8,11 +10,14 @@ export default function SiteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <SiteHeader />
-      <main className="flex-1 pb-20 md:pb-0">{children}</main>
-      <SiteFooter />
-      <MobileBottomNav />
-    </div>
+    <QueryProvider>
+      <div className="flex min-h-screen flex-col">
+        <RouteMetaManager />
+        <SiteHeader />
+        <main className="flex-1 pb-20 md:pb-0">{children}</main>
+        <SiteFooter />
+        <MobileBottomNav />
+      </div>
+    </QueryProvider>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import ListingPageShell from '@/components/layout/ListingPageShell';
 import NurseCard from '@/components/directory/NurseCard';
@@ -10,7 +10,7 @@ import { useInfiniteResourceList } from '@/hooks/useInfiniteResourceList';
 
 const PER_PAGE = 12;
 
-export default function NursesPage() {
+function NursesPageContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -121,7 +121,7 @@ export default function NursesPage() {
         <>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {rows.map((n) => (
-              <NurseCard key={String(n.id)} nurse={n} />
+              <NurseCard key={n.slug} nurse={n} />
             ))}
           </div>
           {error && rows.length > 0 ? <p className="font-ui mt-4 text-center text-sm text-red-700">{error}</p> : null}
@@ -133,5 +133,13 @@ export default function NursesPage() {
         </>
       )}
     </ListingPageShell>
+  );
+}
+
+export default function NursesPage() {
+  return (
+    <Suspense fallback={<p className="font-ui py-12 text-center text-slate-500">Loading…</p>}>
+      <NursesPageContent />
+    </Suspense>
   );
 }

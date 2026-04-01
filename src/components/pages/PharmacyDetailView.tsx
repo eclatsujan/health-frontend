@@ -1,5 +1,5 @@
-'use client';
 // @ts-nocheck
+'use client';
 
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import { useAppName } from '@/hooks/useAppName';
 
 export default function PharmacyDetailView({ slug }: { slug: string }) {
     const appName = useAppName();
-    const { data: p, loading, notFound, loadError } = usePublicSlugResource(pharmacyBySlugUrl(slug));
+    const { data: p, loading, notFound, loadError } = usePublicSlugResource<any>(pharmacyBySlugUrl(slug));
 
     useEffect(() => {
         if (p?.name) {

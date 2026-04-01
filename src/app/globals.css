@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* MediHub — Google Stitch: Inter, teal #0d9488, nav #202124, radii ~8–12px */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Matches the provided doctor search layout (Manrope + Inter) */
+  --font-headline: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-stitch-card: 0.75rem;
+  --radius-stitch-btn: 0.5rem;
+
+  /* MediHub "surface/primary/secondary" tokens (Stitch layout colors) */
+  --color-surface: #f7fafa;
+  --color-on-surface: #181c1c;
+  --color-surface-dim: #d7dbda;
+  --color-surface-bright: #f7fafa;
+  --color-background: #f7fafa;
+
+  --color-on-surface-variant: #3e4949;
+  --color-surface-variant: #e0e3e3;
+  --color-on-secondary-container: #00705c;
+
+  --color-primary: #00595c;
+  --color-primary-container: #0d7377;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed: #9df0f4;
+  --color-primary-fixed-dim: #81d4d8;
+  --color-on-primary-fixed: #002021;
+  --color-on-primary-fixed-variant: #004f52;
+
+  --color-secondary: #006b58;
+  --color-secondary-container: #7ff4d5;
+  --color-on-secondary: #ffffff;
+  --color-secondary-fixed: #82f7d8;
+  --color-secondary-fixed-dim: #64dabd;
+  --color-on-secondary-fixed: #002019;
+  --color-on-secondary-fixed-variant: #005142;
+
+  --color-tertiary: #6f4700;
+  --color-tertiary-container: #8f5d00;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-fixed: #ffddb4;
+  --color-tertiary-fixed-dim: #ffb955;
+  --color-on-tertiary-fixed: #291800;
+  --color-on-tertiary-fixed-variant: #633f00;
+  --color-on-tertiary-container: #ffe3c2;
+
+  --color-outline: #6e7979;
+  --color-outline-variant: #bec9c9;
+
+  --color-surface-container: #ebeeee;
+  --color-surface-container-low: #f1f4f4;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #e5e9e8;
+  --color-surface-container-highest: #e0e3e3;
+
+  --color-inverse-surface: #2d3131;
+  --color-inverse-on-surface: #eef1f1;
+  --color-inverse-primary: #81d4d8;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Global dark token overrides so token-based utilities switch across all pages */
+.dark {
+  --color-surface: #0b1220;
+  --color-on-surface: #e5e7eb;
+  --color-surface-dim: #1f2937;
+  --color-surface-bright: #111827;
+  --color-background: #0b1220;
+
+  --color-on-surface-variant: #94a3b8;
+  --color-surface-variant: #1f2937;
+  --color-on-secondary-container: #a7f3d0;
+
+  --color-primary: #2dd4bf;
+  --color-primary-container: #0f766e;
+  --color-on-primary: #042f2e;
+  --color-primary-fixed: #99f6e4;
+  --color-primary-fixed-dim: #5eead4;
+  --color-on-primary-fixed: #042f2e;
+  --color-on-primary-fixed-variant: #134e4a;
+
+  --color-secondary: #34d399;
+  --color-secondary-container: #064e3b;
+  --color-on-secondary: #022c22;
+  --color-secondary-fixed: #86efac;
+  --color-secondary-fixed-dim: #4ade80;
+  --color-on-secondary-fixed: #022c22;
+  --color-on-secondary-fixed-variant: #14532d;
+
+  --color-tertiary: #f59e0b;
+  --color-tertiary-container: #78350f;
+  --color-on-tertiary: #fffbeb;
+  --color-tertiary-fixed: #fde68a;
+  --color-tertiary-fixed-dim: #fcd34d;
+  --color-on-tertiary-fixed: #451a03;
+  --color-on-tertiary-fixed-variant: #78350f;
+  --color-on-tertiary-container: #fef3c7;
+
+  --color-outline: #475569;
+  --color-outline-variant: #334155;
+
+  --color-surface-container: #111827;
+  --color-surface-container-low: #0f172a;
+  --color-surface-container-lowest: #020617;
+  --color-surface-container-high: #1e293b;
+  --color-surface-container-highest: #334155;
+
+  --color-inverse-surface: #e2e8f0;
+  --color-inverse-on-surface: #0f172a;
+  --color-inverse-primary: #0f766e;
+
+  --color-error: #f87171;
+  --color-error-container: #7f1d1d;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body,
+#app {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Utility: hide scrollbars (used by the doctor search layout) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Icon font used by the provided Stitch layouts */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
 }

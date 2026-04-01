@@ -79,5 +79,5 @@ export function useInfiniteResourceList<T = Record<string, unknown>>(urlForPage:
     return () => obs.disconnect();
   }, [loadMore]);
 
-  return { rows, meta, loading, loadingMore, error, sentinelRef };
+  return { rows, meta, loading, loadingMore, error, sentinelRef, loadMore };
 }

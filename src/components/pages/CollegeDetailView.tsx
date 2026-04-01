@@ -1,5 +1,5 @@
-'use client';
 // @ts-nocheck
+'use client';
 
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import { useAppName } from '@/hooks/useAppName';
 
 export default function CollegeDetailView({ slug }: { slug: string }) {
     const appName = useAppName();
-    const { data: c, loading, notFound, loadError } = usePublicSlugResource(collegeBySlugUrl(slug));
+    const { data: c, loading, notFound, loadError } = usePublicSlugResource<any>(collegeBySlugUrl(slug));
 
     useEffect(() => {
         if (c?.name) {

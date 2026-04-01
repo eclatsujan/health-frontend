@@ -4,7 +4,7 @@ import { fetchJson, type HttpError } from '@/api/publicApi';
 /**
  * Load a single public JSON:API-style resource by URL (e.g. …/slug/{slug}).
  */
-export function usePublicSlugResource<T>(url: string | undefined) {
+export function usePublicSlugResource<T = unknown>(url: string | undefined) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);

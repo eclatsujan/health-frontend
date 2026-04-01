@@ -1,5 +1,5 @@
-'use client';
 // @ts-nocheck
+'use client';
 
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import { useAppName } from '@/hooks/useAppName';
 
 export default function LaboratoryDetailView({ slug }: { slug: string }) {
     const appName = useAppName();
-    const { data: lab, loading, notFound, loadError } = usePublicSlugResource(laboratoryBySlugUrl(slug));
+    const { data: lab, loading, notFound, loadError } = usePublicSlugResource<any>(laboratoryBySlugUrl(slug));
 
     useEffect(() => {
         if (lab?.name) {

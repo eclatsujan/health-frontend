@@ -10,7 +10,7 @@ import { useAppName } from '@/hooks/useAppName';
 
 export default function NurseDetailView({ slug }: { slug: string }) {
   const appName = useAppName();
-  const { data: n, loading, notFound, loadError } = usePublicSlugResource(nurseBySlugUrl(slug));
+  const { data: n, loading, notFound, loadError } = usePublicSlugResource<any>(nurseBySlugUrl(slug));
 
   useEffect(() => {
     if (n?.first_name) {

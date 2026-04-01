@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { Suspense, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import ListingPageShell from '@/components/layout/ListingPageShell';
@@ -97,7 +97,7 @@ function SpecialtyDoctorsSection({ specialtySlug }: { specialtySlug: string }) {
         <>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {rows.map((doc) => (
-              <DoctorCard key={String(doc.id)} doctor={doc} />
+              <DoctorCard key={doc.slug} doctor={doc} />
             ))}
           </div>
           {error && rows.length > 0 ? <p className="font-ui mt-4 text-center text-sm text-red-700">{error}</p> : null}
@@ -181,7 +181,9 @@ export default function SpecialtyPageView({ slug }: { slug: string }) {
         </div>
       ) : null}
 
-      <SpecialtyDoctorsSection specialtySlug={slug} />
+      <Suspense fallback={<p className="font-ui py-8 text-center text-slate-500">Loading doctors…</p>}>
+        <SpecialtyDoctorsSection specialtySlug={slug} />
+      </Suspense>
 
       <p className="mt-10 text-center">
         <Link href="/doctors" className="font-ui text-sm font-medium text-[#0d9488] hover:underline">
